@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.example.geoquiz.databinding.ActivityMainBinding
 
@@ -31,6 +32,20 @@ class MainActivity : AppCompatActivity() {
                 binding.questionTextView.setText(questionTextResId)
                 updateQuestion()
             }
+        binding.prevButton.setOnClickListener {
+            if (currentIndex == 0){
+                currentIndex = questionBank.lastIndex
+                val questionTextResId = questionBank[currentIndex].textResId
+                binding.questionTextView.setText(questionTextResId)
+                updateQuestion()
+            }
+            else {
+                currentIndex = (currentIndex - 1) % questionBank.size
+                val questionTextResId = questionBank[currentIndex].textResId
+                binding.questionTextView.setText(questionTextResId)
+                updateQuestion()
+            }
+        }
 
         binding.trueButton.setOnClickListener { view: View ->
             checkAnswer(true)
