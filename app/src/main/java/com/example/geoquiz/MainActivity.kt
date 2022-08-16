@@ -33,11 +33,11 @@ class MainActivity : AppCompatActivity() {
             }
 
         binding.trueButton.setOnClickListener { view: View ->
-            Snackbar.make(trueButton,R.string.correct_snackbar, Snackbar.LENGTH_SHORT).show()
+            checkAnswer(true)
         }
 
         binding.falseButton.setOnClickListener { view: View ->
-            Snackbar.make(falseButton,R.string.incorrect_snackbar, Snackbar.LENGTH_SHORT).show()
+            checkAnswer(false)
         }
         val questionTextResId = questionBank[currentIndex].textResId
         binding.questionTextView.setText(questionTextResId)
@@ -46,5 +46,12 @@ class MainActivity : AppCompatActivity() {
     private fun updateQuestion() {
         val questionTextResId = questionBank[currentIndex].textResId
         binding.questionTextView.setText(questionTextResId)
+    }
+    private fun checkAnswer(userAnswer: Boolean) {
+        val correctAnswer = questionBank[currentIndex].answer
+        val messageResId = if (userAnswer == correctAnswer) {
+            R.string.correct_snackbar}
+        else {R.string.incorrect_snackbar}
+        Snackbar.make(falseButton,messageResId, Snackbar.LENGTH_SHORT).show()
     }
     }
