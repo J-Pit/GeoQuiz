@@ -2,13 +2,17 @@ package com.example.geoquiz
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.example.geoquiz.databinding.ActivityMainBinding
 
+private const val TAG = "MainActivity"
+
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var trueButton: Button
     private lateinit var falseButton: Button
@@ -20,8 +24,10 @@ class MainActivity : AppCompatActivity() {
         Question(R.string.question_americas, true),
         Question(R.string.question_asia, true))
     private var currentIndex = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate(Bundle?) called")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         trueButton = findViewById(R.id.true_button)
@@ -33,18 +39,15 @@ class MainActivity : AppCompatActivity() {
                 updateQuestion()
             }
         binding.prevButton.setOnClickListener {
-            if (currentIndex == 0){
-                currentIndex = questionBank.lastIndex
-                val questionTextResId = questionBank[currentIndex].textResId
-                binding.questionTextView.setText(questionTextResId)
-                updateQuestion()
+            currentIndex = if (currentIndex == 0){
+                questionBank.lastIndex
+
+            } else {
+                (currentIndex - 1) % questionBank.size
             }
-            else {
-                currentIndex = (currentIndex - 1) % questionBank.size
-                val questionTextResId = questionBank[currentIndex].textResId
-                binding.questionTextView.setText(questionTextResId)
-                updateQuestion()
-            }
+            val questionTextResId = questionBank[currentIndex].textResId
+            binding.questionTextView.setText(questionTextResId)
+            updateQuestion()
         }
 
         binding.trueButton.setOnClickListener { view: View ->

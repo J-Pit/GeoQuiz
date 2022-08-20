@@ -11,5 +11,5 @@
     <string name="correct_snackbar">Correct!</string>
     <string name="incorrect_snackbar">Incorrect!</string>
     <string name="next_button">Next</string>
-    <string name="previous_button">Previous</string>
+    <string name="previous_button">Prev</string>
 </resources>

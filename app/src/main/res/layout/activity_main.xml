@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             app:icon="@drawable/arrow_left"
             android:text="@string/previous_button"
-            app:iconGravity="end" />
+            app:iconGravity="start" />
 
         <Button
             android:id="@+id/next_button"
