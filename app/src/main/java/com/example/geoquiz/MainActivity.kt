@@ -45,6 +45,9 @@ class MainActivity : AppCompatActivity() {
         binding.falseButton.setOnClickListener { view: View ->
             checkAnswer(false)
         }
+        binding.cheatButton.setOnClickListener {
+            // Start CheatActivity
+        }
         updateQuestion()
     }
     private fun updateQuestion() {
